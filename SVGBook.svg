@@ -1,20 +1,24 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<svg:svg xmlns:svg="http://www.w3.org/2000/svg">
-  <svg:script
+<svg xmlns="http://www.w3.org/2000/svg">
+  <script
      type="text/ecmascript"
      id="script17274">
       
     function buttonEvent(event) {
+      
       if ((event.type == &quot;click&quot; &amp;&amp; event.button == 0) ||
           (event.type == &quot;keydown&quot; &amp;&amp;
 	  (event.keyCode == 32 || event.keyCode ==13))) {
       
+          
     var SVGDocument = event.target.ownerDocument;
+    <!-- Not needed atm  
 	var SVGRoot     = SVGDocument.documentElement;
 	var ButtonSend  = SVGDocument.getElementById(&quot;ButtonSEND&quot;);
-    var ButtonDelete  = SVGDocument.getElementById(&quot;ButtonDELETE&quot;);
+    var ButtonDelete  = SVGDocument.getElementById(&quot;ButtonDELETE&quot;);--> 
       
     var ButtonPost  = SVGDocument.getElementById(&quot;PostField&quot;);
+    var ButtonPost_Text  = SVGDocument.getElementById(&quot;PostField_Text&quot;);
     var fill = &quot;none&quot;;  
     <!-- 
       Button for GDPR export data; move delete to individual ones
@@ -35,9 +39,10 @@
         (event.target.id == "ButtonDELETE" || event.target.id == "ButtonDELETE_Text")) 
         {
             
-            fill = &quot;red&quot;;
+            fill = &quot;none&quot;;
       
             ButtonPost.style.setProperty(&quot;fill&quot;, fill, &quot;&quot;);
+            ButtonPost_Text.textContent="";
         }
         
       
@@ -51,6 +56,11 @@
       }
     }
       
+    function inputText()
+	{
+		document.getElementById('PostField_Text').textContent = prompt("Please enter some text:");
+	}
+      
       function fucked() {
       
             var ButtonPost  = SVGDocument.getElementById(&quot;PostField&quot;);  
@@ -60,52 +70,80 @@
               var text = &quot;Individual Text enter here..&quot;;
 
             ButtonPost.style.setProperty(&quot;fill&quot;, fill, &quot;&quot;);
-      
       }
       
       
-  </svg:script>
-  <svg:g
+  </script>
+    
+  <g
      id="layer1"
      onkeydown="return buttonEvent(evt);"
      onclick="return buttonEvent(evt);">
-    <svg:rect width="220"
+    <rect width="220"
        height="80"
        ry="40"
        x="10"
        y="10"
        id="ButtonSEND"
        style="fill: green; stroke: none;" />
-    <svg:text
+    <text
        xml:space="preserve"
-       style="font-size:40px;text-align:center;text-anchor:middle;fill:#ffffff;stroke:none;font-family:DejaVu Sans"><svg:tspan
+       style="font-size:40px;text-align:center;text-anchor:middle;fill:#ffffff;stroke:none;font-family:DejaVu Sans"><tspan
          x="120"
          y="64.5"
-         id="ButtonSEND_Text">SEND</svg:tspan></svg:text>
+         id="ButtonSEND_Text">SEND</tspan></text>
       
       
-    <svg:rect width="220"
+    <rect width="220"
        height="80"
        ry="40"
        x="250"
        y="10"
        id="ButtonDELETE"
-       style="fill: red; stroke: none;" />
-    <svg:text
+       style="fill: red; stroke: none;"/>
+    <text
        xml:space="preserve"
-       style="font-size:40px;text-align:center;text-anchor:middle;fill:#ffffff;stroke:none;font-family:DejaVu Sans"><svg:tspan
+       style="font-size:40px;text-align:center;text-anchor:middle;fill:#ffffff;stroke:none;font-family:DejaVu Sans"><tspan
          x="360"
          y="64.5"
-         id="ButtonDELETE_Text">DELETE</svg:tspan></svg:text>
+         id="ButtonDELETE_Text">DELETE</tspan></text>
       
       
-    <svg:rect width="460"
+    <rect onclick="return inputText();"
+       width="460"
        height="160"
        ry="40"
        x="10"
        y="100"
        id="PostField" 
        style="fill: none; stroke: none;"/>
-  </svg:g>
+      <!--Maybe x="30".. Add char limit to 20 chars/line and maximum 80 or 100 chars. Also copy current text to js input popup field  -->
+    <text
+       xml:space="preserve"
+       style="font-size:32px;fill:#ffffff;font-family:DejaVu Sans"><tspan
+         x="40" 
+         y="144.5"
+         id="PostField_Text"></tspan></text>
+ 
+      <!-- Doesn't work without html>
+    <foreignobject class="node" x="100" y="500" width="100" height="100">
+       <div contenteditable="true">
+       <svg>
+       <text          x="360"
+         y="64.5"id="Username" class="cls-7" transform="translate(142 20)"><tspan x="0" y="0">Username</tspan></text>
+       </svg>
+       </div>    
+    </foreignobject>
+-->
+      
+    <!-- Textbox replacement.. or work with keypress detection and print to new one (half-transparent preview) 
+    <svg:g 
+             id="layer2"
+             transform="translate(100,100)">
+        <svg:text contentEditable="true">foo</svg:text>
+    </svg:g>
+      -->
+      
+  </g>
   <script />
-</svg:svg>
+</svg>
