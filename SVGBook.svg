@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg:svg xmlns:svg="http://www.w3.org/2000/svg">
+  <svg:script
+     type="text/ecmascript"
+     id="script17274">
+      
+    function buttonEvent(event) {
+      if ((event.type == &quot;click&quot; &amp;&amp; event.button == 0) ||
+          (event.type == &quot;keydown&quot; &amp;&amp;
+	  (event.keyCode == 32 || event.keyCode ==13))) {
+      
+    var SVGDocument = event.target.ownerDocument;
+	var SVGRoot     = SVGDocument.documentElement;
+	var ButtonSend  = SVGDocument.getElementById(&quot;ButtonSEND&quot;);
+    var ButtonDelete  = SVGDocument.getElementById(&quot;ButtonDELETE&quot;);
+      
+    var ButtonPost  = SVGDocument.getElementById(&quot;PostField&quot;);
+    var fill = &quot;none&quot;;  
+    <!-- 
+      Button for GDPR export data; move delete to individual ones
+      Maybe allow cloning/branches and locaization?
+      Allow SVG upload and reduce them (check for cascading nodes, links, etc.)
+      -->
+      
+        <!-- Create comment on click on element with id-->
+        if(event.target.id == "ButtonSEND" || event.target.id == "ButtonSEND_Text") 
+        {
+            fill = &quot;black&quot;;
+      
+            var text = &quot;Individual Text enter here..&quot;;
+            ButtonPost.style.setProperty(&quot;fill&quot;, fill, &quot;&quot;);
+        }
+        <!-- Delete comment on click on button -->
+        else if (ButtonPost.style.fill == "black" &amp;&amp; 
+        (event.target.id == "ButtonDELETE" || event.target.id == "ButtonDELETE_Text")) 
+        {
+            
+            fill = &quot;red&quot;;
+      
+            ButtonPost.style.setProperty(&quot;fill&quot;, fill, &quot;&quot;);
+        }
+        
+      
+      
+
+
+
+    
+
+
+      }
+    }
+      
+      function fucked() {
+      
+            var ButtonPost  = SVGDocument.getElementById(&quot;PostField&quot;);  
+
+            var fill = &quot;black&quot;;
+
+              var text = &quot;Individual Text enter here..&quot;;
+
+            ButtonPost.style.setProperty(&quot;fill&quot;, fill, &quot;&quot;);
+      
+      }
+      
+      
+  </svg:script>
+  <svg:g
+     id="layer1"
+     onkeydown="return buttonEvent(evt);"
+     onclick="return buttonEvent(evt);">
+    <svg:rect width="220"
+       height="80"
+       ry="40"
+       x="10"
+       y="10"
+       id="ButtonSEND"
+       style="fill: green; stroke: none;" />
+    <svg:text
+       xml:space="preserve"
+       style="font-size:40px;text-align:center;text-anchor:middle;fill:#ffffff;stroke:none;font-family:DejaVu Sans"><svg:tspan
+         x="120"
+         y="64.5"
+         id="ButtonSEND_Text">SEND</svg:tspan></svg:text>
+      
+      
+    <svg:rect width="220"
+       height="80"
+       ry="40"
+       x="250"
+       y="10"
+       id="ButtonDELETE"
+       style="fill: red; stroke: none;" />
+    <svg:text
+       xml:space="preserve"
+       style="font-size:40px;text-align:center;text-anchor:middle;fill:#ffffff;stroke:none;font-family:DejaVu Sans"><svg:tspan
+         x="360"
+         y="64.5"
+         id="ButtonDELETE_Text">DELETE</svg:tspan></svg:text>
+      
+      
+    <svg:rect width="460"
+       height="160"
+       ry="40"
+       x="10"
+       y="100"
+       id="PostField" 
+       style="fill: none; stroke: none;"/>
+  </svg:g>
+  <script />
+</svg:svg>
