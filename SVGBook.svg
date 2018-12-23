@@ -4,6 +4,12 @@
      type="text/ecmascript"
      id="script17274">
       
+      var svgPane = document.getElementById("svg_book");
+        var NS = "http://www.w3.org/2000/svg";
+          var ButtonPost = []
+          var ButtonPost_Text = []
+          var BPy=0;
+      
     function buttonEvent(event) {
       
       if ((event.type == &quot;click&quot; &amp;&amp; event.button == 0) ||
@@ -16,9 +22,7 @@
 	var SVGRoot     = SVGDocument.documentElement;
 	var ButtonSend  = SVGDocument.getElementById(&quot;ButtonSEND&quot;);
     var ButtonDelete  = SVGDocument.getElementById(&quot;ButtonDELETE&quot;);--> 
-      
-    var ButtonPost  = SVGDocument.getElementById(&quot;PostField&quot;);
-    var ButtonPost_Text  = SVGDocument.getElementById(&quot;PostField_Text&quot;);
+    
     var fill = &quot;none&quot;;  
     <!-- 
       Button for GDPR export data; move delete to individual ones
@@ -29,26 +33,37 @@
         <!-- Create comment on click on element with id-->
         if(event.target.id == "ButtonSEND" || event.target.id == "ButtonSEND_Text") 
         {
-            
-        fill = &quot;black&quot;;
-                
-
-            ButtonPost.setAttribute("x", 10);
-            ButtonPost.setAttribute("y", 100);
-            var text = &quot;Individual Text enter here..&quot;;
-            ButtonPost.style.setProperty(&quot;fill&quot;, fill, &quot;&quot;);
+                            
+       ButtonPost[BPy] = document.createElementNS(NS, "rect");
+       
+       ButtonPost[BPy].setAttribute('onclick','return inputText();');
+       ButtonPost[BPy].setAttribute("x", 10);
+       ButtonPost[BPy].setAttribute("y", BPy*170+100);
+       ButtonPost[BPy].setAttribute("ry", 40);
+       ButtonPost[BPy].setAttribute("width", 460);
+       ButtonPost[BPy].setAttribute("height", 160);
+       ButtonPost[BPy].setAttribute("fill", "black");
+      
+       ButtonPost_Text[BPy] = document.createElementNS(NS, "text");
+       ButtonPost_Text[BPy].setAttribute("style", "font-size:32px;fill:#ffffff;font-family:DejaVu Sans");
+       ButtonPost_Text[BPy].setAttribute("x", 40);
+       ButtonPost_Text[BPy].setAttribute("y", BPy*170+144.5);
+       ButtonPost_Text[BPy].textContent= ("Individual Text enter here.");
+      
+    svgPane.appendChild(ButtonPost[BPy]);
+    svgPane.appendChild(ButtonPost_Text[BPy]);
+      BPy=BPy+1;
       
 
         }
         <!-- Delete comment on click on button -->
-        else if (ButtonPost.style.fill == "black" &amp;&amp; 
-        (event.target.id == "ButtonDELETE" || event.target.id == "ButtonDELETE_Text")) 
+        else if <!--(ButtonPost[BPy-1].style.fill == "black" &amp;&amp; -->
+        ((event.target.id == "ButtonDELETE" || event.target.id == "ButtonDELETE_Text")  &amp;&amp; BPy>0)<!--) -->
         {
             
-            fill = &quot;none&quot;;
-      
-            ButtonPost.style.setProperty(&quot;fill&quot;, fill, &quot;&quot;);
-            ButtonPost_Text.textContent="";
+            BPy=BPy-1;
+            ButtonPost[BPy].setAttribute("fill", "red");
+            ButtonPost_Text[BPy].textContent="";
         }
         
       
@@ -64,7 +79,7 @@
       
     function inputText()
 	{
-		document.getElementById('PostField_Text').textContent = prompt("Please enter some text:");
+		document.getElementById(ButtonPost_Text[BPy]).textContent = prompt("Please enter some text:");
 	}
       
       function fucked() {
@@ -119,7 +134,6 @@
        width="460"
        height="160"
        ry="40"
-       id="PostField" 
        style="fill: none; stroke: none;"/>
       <!--Maybe x="30".. Add char limit to 20 chars/line and maximum 80 or 100 chars. Also copy current text to js input popup field  -->
     <text
