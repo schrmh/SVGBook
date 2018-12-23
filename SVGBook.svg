@@ -17,7 +17,8 @@
 	var ButtonSend  = SVGDocument.getElementById(&quot;ButtonSEND&quot;);
     var ButtonDelete  = SVGDocument.getElementById(&quot;ButtonDELETE&quot;);--> 
       
-    var ButtonPost  = SVGDocument.getElementById(&quot;PostField&quot;);
+    var ButtonPost  = []
+    var BPy=0;
     var ButtonPost_Text  = SVGDocument.getElementById(&quot;PostField_Text&quot;);
     var fill = &quot;none&quot;;  
     <!-- 
@@ -32,11 +33,11 @@
             
         fill = &quot;black&quot;;
                 
-
-            ButtonPost.setAttribute("x", 10);
-            ButtonPost.setAttribute("y", 100);
+            BPy=BPy+1;
+            ButtonPost[BPy-1] = SVGDocument.getElementById(&quot;PostField&quot;);
+            ButtonPost[BPy-1].setAttribute("y", BPy*100);
             var text = &quot;Individual Text enter here..&quot;;
-            ButtonPost.style.setProperty(&quot;fill&quot;, fill, &quot;&quot;);
+            ButtonPost[BPy-1].style.setProperty(&quot;fill&quot;, fill, &quot;&quot;);
       
 
         }
@@ -119,6 +120,7 @@
        width="460"
        height="160"
        ry="40"
+       x="10"
        id="PostField" 
        style="fill: none; stroke: none;"/>
       <!--Maybe x="30".. Add char limit to 20 chars/line and maximum 80 or 100 chars. Also copy current text to js input popup field  -->
