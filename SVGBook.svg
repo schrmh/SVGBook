@@ -25,8 +25,12 @@
         <!-- Create comment on click on element with id-->
         if(event.target.id == "ButtonSEND" || event.target.id == "ButtonSEND_Text") 
         {
-            fill = &quot;black&quot;;
-      
+            
+        fill = &quot;black&quot;;
+                
+
+            ButtonPost.setAttribute("x", 10);
+            ButtonPost.setAttribute("y", 100);
             var text = &quot;Individual Text enter here..&quot;;
             ButtonPost.style.setProperty(&quot;fill&quot;, fill, &quot;&quot;);
         }
@@ -102,8 +106,6 @@
     <svg:rect width="460"
        height="160"
        ry="40"
-       x="10"
-       y="100"
        id="PostField" 
        style="fill: none; stroke: none;"/>
   </svg:g>
