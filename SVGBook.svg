@@ -32,15 +32,9 @@
             
         fill = &quot;black&quot;;
                 
-      var svgPane = document.getElementById("svg_book");
-  var NS = "http://www.w3.org/2000/svg";
-var edge = document.createElementNS(NS, "rect");
-       edge.setAttribute("x", 100);
-       edge.setAttribute("y", 100);
-       edge.setAttribute("height", 300);
-       edge.setAttribute("width", 300);
-       edge.setAttribute("fill", "red");
-    svgPane.appendChild(edge);
+
+            ButtonPost.setAttribute("x", 10);
+            ButtonPost.setAttribute("y", 100);
             var text = &quot;Individual Text enter here..&quot;;
             ButtonPost.style.setProperty(&quot;fill&quot;, fill, &quot;&quot;);
       
@@ -125,8 +119,6 @@ var edge = document.createElementNS(NS, "rect");
        width="460"
        height="160"
        ry="40"
-       x="10"
-       y="100"
        id="PostField" 
        style="fill: none; stroke: none;"/>
       <!--Maybe x="30".. Add char limit to 20 chars/line and maximum 80 or 100 chars. Also copy current text to js input popup field  -->
