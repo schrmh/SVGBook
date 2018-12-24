@@ -34,9 +34,9 @@
         if(event.target.id == "ButtonSEND" || event.target.id == "ButtonSEND_Text") 
         {
                             
-       ButtonPost[BPy] = document.createElementNS(NS, "rect");
-       
-       ButtonPost[BPy].setAttribute('onclick','return inputText();');
+       ButtonPost[BPy] = document.createElementNS(NS, "rect"); 
+       ButtonPost[BPy].setAttribute("id", BPy); <!-- Hack.. -->
+       ButtonPost[BPy].setAttribute('onclick','inputText(this.id);');
        ButtonPost[BPy].setAttribute("x", 10);
        ButtonPost[BPy].setAttribute("y", BPy*170+100);
        ButtonPost[BPy].setAttribute("ry", 40);
@@ -45,10 +45,13 @@
        ButtonPost[BPy].setAttribute("fill", "black");
       
        ButtonPost_Text[BPy] = document.createElementNS(NS, "text");
+       ButtonPost_Text[BPy].setAttribute("id", BPy); <!-- Hack.. -->
+       ButtonPost_Text[BPy].setAttribute('onclick','inputText(this.id);');
        ButtonPost_Text[BPy].setAttribute("style", "font-size:32px;fill:#ffffff;font-family:DejaVu Sans");
        ButtonPost_Text[BPy].setAttribute("x", 40);
        ButtonPost_Text[BPy].setAttribute("y", BPy*170+144.5);
        ButtonPost_Text[BPy].textContent= ("Individual Text enter here.");
+        <!-- ButtonPost_Text[BPy].setAttribute("id", "BPT"+BPy); -->
       
     svgPane.appendChild(ButtonPost[BPy]);
     svgPane.appendChild(ButtonPost_Text[BPy]);
@@ -62,24 +65,17 @@
         {
             
             BPy=BPy-1;
-            ButtonPost[BPy].setAttribute("fill", "red");
+            ButtonPost[BPy].setAttribute("fill", "none");
             ButtonPost_Text[BPy].textContent="";
         }
         
-      
-      
-
-
-
-    
-
-
       }
     }
       
-    function inputText()
+    function inputText(clicked_id)
 	{
-		document.getElementById(ButtonPost_Text[BPy]).textContent = prompt("Please enter some text:");
+        <!-- alert(clicked_id); Very dumb hack.. -->
+		ButtonPost_Text[clicked_id].textContent = prompt("Please enter some text:");
 	}
       
       function fucked() {
@@ -130,11 +126,7 @@
          id="ButtonDELETE_Text">DELETE</tspan></text>
       
       
-    <rect onclick="return inputText();"
-       width="460"
-       height="160"
-       ry="40"
-       style="fill: none; stroke: none;"/>
+      
       <!--Maybe x="30".. Add char limit to 20 chars/line and maximum 80 or 100 chars. Also copy current text to js input popup field  -->
     <text
        xml:space="preserve"
