@@ -25,9 +25,30 @@
         <!-- Create comment on click on element with id-->
         if(event.target.id == "ButtonSEND" || event.target.id == "ButtonSEND_Text") 
         {
-            
-        fill = &quot;black&quot;;
-                
+                            
+       ButtonPost[BPy] = document.createElementNS(NS, "rect"); 
+       ButtonPost[BPy].setAttribute("id", BPy); <!-- Hack.. -->
+       ButtonPost[BPy].setAttribute('onclick','inputText(this.id);');
+       ButtonPost[BPy].setAttribute("x", 10);
+       ButtonPost[BPy].setAttribute("y", BPy*170+100);
+       ButtonPost[BPy].setAttribute("ry", 40);
+       ButtonPost[BPy].setAttribute("width", 460);
+       ButtonPost[BPy].setAttribute("height", 160);
+       ButtonPost[BPy].setAttribute("fill", "black");
+      
+       ButtonPost_Text[BPy] = document.createElementNS(NS, "text");
+       ButtonPost_Text[BPy].setAttribute("id", BPy); <!-- Hack.. -->
+       ButtonPost_Text[BPy].setAttribute('onclick','inputText(this.id);');
+       ButtonPost_Text[BPy].setAttribute("style", "font-size:32px;fill:#ffffff;font-family:DejaVu Sans");
+       ButtonPost_Text[BPy].setAttribute("x", 40);
+       ButtonPost_Text[BPy].setAttribute("y", BPy*170+144.5);
+       ButtonPost_Text[BPy].textContent= ("Individual Text enter here.");
+        <!-- ButtonPost_Text[BPy].setAttribute("id", "BPT"+BPy); -->
+      
+    svgPane.appendChild(ButtonPost[BPy]);
+    svgPane.appendChild(ButtonPost_Text[BPy]);
+      BPy=BPy+1;
+      
 
             ButtonPost.setAttribute("x", 10);
             ButtonPost.setAttribute("y", 100);
@@ -39,21 +60,19 @@
         (event.target.id == "ButtonDELETE" || event.target.id == "ButtonDELETE_Text")) 
         {
             
-            fill = &quot;red&quot;;
-      
-            ButtonPost.style.setProperty(&quot;fill&quot;, fill, &quot;&quot;);
+            BPy=BPy-1;
+            ButtonPost[BPy].setAttribute("fill", "none");
+            ButtonPost_Text[BPy].textContent="";
         }
         
-      
-      
-
-
-
-    
-
-
       }
     }
+      
+    function inputText(clicked_id)
+	{
+        <!-- alert(clicked_id); Very dumb hack.. -->
+		ButtonPost_Text[clicked_id].textContent = prompt("Please enter some text:");
+	}
       
       function fucked() {
       
@@ -103,11 +122,34 @@
          id="ButtonDELETE_Text">DELETE</svg:tspan></svg:text>
       
       
-    <svg:rect width="460"
-       height="160"
-       ry="40"
-       id="PostField" 
-       style="fill: none; stroke: none;"/>
-  </svg:g>
+      
+      <!--Maybe x="30".. Add char limit to 20 chars/line and maximum 80 or 100 chars. Also copy current text to js input popup field  -->
+    <text
+       xml:space="preserve"
+       style="font-size:32px;fill:#ffffff;font-family:DejaVu Sans"><tspan
+         x="40" 
+         y="144.5"
+         id="PostField_Text"></tspan></text>
+ 
+      <!-- Doesn't work without html>
+    <foreignobject class="node" x="100" y="500" width="100" height="100">
+       <div contenteditable="true">
+       <svg>
+       <text          x="360"
+         y="64.5"id="Username" class="cls-7" transform="translate(142 20)"><tspan x="0" y="0">Username</tspan></text>
+       </svg>
+       </div>    
+    </foreignobject>
+-->
+      
+    <!-- Textbox replacement.. or work with keypress detection and print to new one (half-transparent preview) 
+    <svg:g 
+             id="layer2"
+             transform="translate(100,100)">
+        <svg:text contentEditable="true">foo</svg:text>
+    </svg:g>
+      -->
+      
+  </g>
   <script />
-</svg:svg>
+</svg>
