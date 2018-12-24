@@ -4,6 +4,28 @@
      type="text/ecmascript"
      id="script17274">
       
+      var svgPane = document.getElementById("svg_book");
+        var NS = "http://www.w3.org/2000/svg";
+      
+          <!-- LAYER-->       
+          MouseOverLayer = document.createElementNS(NS, "g");
+          MouseOverLayer.id = "layer0";
+          MouseOverLayer.setAttribute("fill", "green");
+          MouseOverLayer.setAttribute("style", "fill-opacity: .0");
+          PostLayer = document.createElementNS(NS, "g");
+          PostLayer.id = "layer1";
+          QuickActionOnPostLayer = document.createElementNS(NS, "g");
+          QuickActionOnPostLayer.setAttribute("id", "layer2");
+          
+          <!-- VARIABLEN -->
+          var ButtonPost = []
+          var ButtonPost_Text = []
+          var ButtonPostMouseOver = []
+          var ButtonPostDelete = []
+      
+          var BPy=0;
+      
+      
     function buttonEvent(event) {
       if ((event.type == &quot;click&quot; &amp;&amp; event.button == 0) ||
           (event.type == &quot;keydown&quot; &amp;&amp;
@@ -25,30 +47,60 @@
         <!-- Create comment on click on element with id-->
         if(event.target.id == "ButtonSEND" || event.target.id == "ButtonSEND_Text") 
         {
-                            
-       ButtonPost[BPy] = document.createElementNS(NS, "rect"); 
-       ButtonPost[BPy].setAttribute("id", BPy); <!-- Hack.. -->
-       ButtonPost[BPy].setAttribute('onclick','inputText(this.id);');
-       ButtonPost[BPy].setAttribute("x", 10);
-       ButtonPost[BPy].setAttribute("y", BPy*170+100);
-       ButtonPost[BPy].setAttribute("ry", 40);
-       ButtonPost[BPy].setAttribute("width", 460);
-       ButtonPost[BPy].setAttribute("height", 160);
-       ButtonPost[BPy].setAttribute("fill", "black");
       
-       ButtonPost_Text[BPy] = document.createElementNS(NS, "text");
-       ButtonPost_Text[BPy].setAttribute("id", BPy); <!-- Hack.. -->
-       ButtonPost_Text[BPy].setAttribute('onclick','inputText(this.id);');
-       ButtonPost_Text[BPy].setAttribute("style", "font-size:32px;fill:#ffffff;font-family:DejaVu Sans");
-       ButtonPost_Text[BPy].setAttribute("x", 40);
-       ButtonPost_Text[BPy].setAttribute("y", BPy*170+144.5);
-       ButtonPost_Text[BPy].textContent= ("Individual Text enter here.");
-        <!-- ButtonPost_Text[BPy].setAttribute("id", "BPT"+BPy); -->
+           <!-- BUTTONS-->
+            
+           ButtonPost[BPy] = document.createElementNS(NS, "rect"); 
+           ButtonPost[BPy].setAttribute("id", BPy); <!-- Hack.. -->
+           ButtonPost[BPy].setAttribute('onclick','inputText(this.id);');
+           ButtonPost[BPy].setAttribute("x", 10);
+           ButtonPost[BPy].setAttribute("y", BPy*170+100);
+           ButtonPost[BPy].setAttribute("ry", 40);
+           ButtonPost[BPy].setAttribute("width", 460);
+           ButtonPost[BPy].setAttribute("height", 160);
+           ButtonPost[BPy].setAttribute("fill", "black");
       
-    svgPane.appendChild(ButtonPost[BPy]);
-    svgPane.appendChild(ButtonPost_Text[BPy]);
-      BPy=BPy+1;
+           ButtonPostMouseOver[BPy] = document.createElementNS(NS, "rect");
+           ButtonPostMouseOver[BPy].setAttribute("id", BPy); <!-- Hack.. -->
+           ButtonPostMouseOver[BPy].setAttribute('onmouseover','displayQuickMenu(this.id);');
+           ButtonPostMouseOver[BPy].setAttribute("x", 460-460/10);
+           ButtonPostMouseOver[BPy].setAttribute("y", BPy*170+100);
+           ButtonPostMouseOver[BPy].setAttribute("width", 10+460/10);
+           ButtonPostMouseOver[BPy].setAttribute("height", 160);
       
+           ButtonPostDelete[BPy] = document.createElementNS(NS, "rect"); <!-- Use clip-path later to cut it-->
+           ButtonPostDelete[BPy].setAttribute("x", 50);
+           ButtonPostDelete[BPy].setAttribute("y", BPy*170+100);
+           ButtonPostDelete[BPy].setAttribute("ry", 40);
+           ButtonPostDelete[BPy].setAttribute("width", 460);
+           ButtonPostDelete[BPy].setAttribute("height", 160);
+           ButtonPostDelete[BPy].setAttribute("fill", "none");
+      
+            
+           <!-- TEXT-->
+
+           ButtonPost_Text[BPy] = document.createElementNS(NS, "text");
+           ButtonPost_Text[BPy].setAttribute("id", BPy); <!-- Hack.. -->
+           ButtonPost_Text[BPy].setAttribute('onclick','inputText(this.id);');
+           ButtonPost_Text[BPy].setAttribute("style", "font-size:32px;fill:#ffffff;font-family:DejaVu Sans");
+           ButtonPost_Text[BPy].setAttribute("x", 40);
+           ButtonPost_Text[BPy].setAttribute("y", BPy*170+144.5);
+           ButtonPost_Text[BPy].textContent= ("Individual Text enter here.");
+            <!-- ButtonPost_Text[BPy].setAttribute("id", "BPT"+BPy); -->
+
+           <!-- PANE-->
+      
+           svgPane.appendChild(QuickActionOnPostLayer);
+           svgPane.appendChild(PostLayer);
+           svgPane.appendChild(MouseOverLayer);
+      
+           MouseOverLayer.appendChild(ButtonPostMouseOver[BPy]);
+           PostLayer.appendChild(ButtonPost[BPy]);
+           PostLayer.appendChild(ButtonPost_Text[BPy]);
+           QuickActionOnPostLayer.appendChild(ButtonPostDelete[BPy]);
+      
+      
+          BPy=BPy+1;
 
             ButtonPost.setAttribute("x", 10);
             ButtonPost.setAttribute("y", 100);
@@ -72,6 +124,11 @@
 	{
         <!-- alert(clicked_id); Very dumb hack.. -->
 		ButtonPost_Text[clicked_id].textContent = prompt("Please enter some text:");
+	}
+    function displayQuickMenu(hover_id)
+	{
+		ButtonPostDelete[hover_id].setAttribute("fill", "red");
+        ButtonPostMouseOver[hover_id].setAttribute("fill", "none");
 	}
       
       function fucked() {
