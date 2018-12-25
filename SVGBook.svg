@@ -69,6 +69,8 @@
            ButtonPostMouseOver[BPy].setAttribute("height", 160);
       
            ButtonPostDelete[BPy] = document.createElementNS(NS, "rect"); <!-- Use clip-path later to cut it-->
+           ButtonPostDelete[BPy].setAttribute("id", BPy); <!-- Hack.. -->
+           ButtonPostDelete[BPy].setAttribute('onclick','removePost(this.id);');
            ButtonPostDelete[BPy].setAttribute("x", 50);
            ButtonPostDelete[BPy].setAttribute("y", BPy*170+100);
            ButtonPostDelete[BPy].setAttribute("ry", 40);
@@ -115,6 +117,8 @@
             BPy=BPy-1;
             ButtonPost[BPy].setAttribute("fill", "none");
             ButtonPost_Text[BPy].textContent="";
+            ButtonPostMouseOver[BPy].setAttribute("fill", "none");
+            ButtonPostDelete[BPy].setAttribute("fill", "none");
         }
         
       }
@@ -129,6 +133,13 @@
 	{
 		ButtonPostDelete[hover_id].setAttribute("fill", "red");
         ButtonPostMouseOver[hover_id].setAttribute("fill", "none");
+	}
+    function removePost(clicked_id)
+	{
+        ButtonPost[clicked_id].setAttribute("fill", "none");
+        ButtonPost_Text[clicked_id].textContent="";
+        ButtonPostMouseOver[clicked_id].setAttribute("fill", "none");
+        ButtonPostDelete[clicked_id].setAttribute("fill", "none");
 	}
       
       function fucked() {
