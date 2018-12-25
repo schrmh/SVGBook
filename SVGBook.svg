@@ -14,8 +14,22 @@
           MouseOverLayer.setAttribute("style", "fill-opacity: .0");
           PostLayer = document.createElementNS(NS, "g");
           PostLayer.id = "layer1";
+      
+          PostLayer.setAttribute('onmouseover','removeQuickMenu(this.id);');
           QuickActionOnPostLayer = document.createElementNS(NS, "g");
           QuickActionOnPostLayer.setAttribute("id", "layer2");
+          BackgroundLayer = document.createElementNS(NS, "g");
+          
+            
+        <!--  var BackgroundPane = document.createElementNS(NS, "rect"); 
+          BackgroundPane.setAttribute("x", 0);
+          BackgroundPane.setAttribute("y", 90);
+          BackgroundPane.setAttribute("width", 600);
+          BackgroundPane.setAttribute("height", 160);
+          BackgroundPane.setAttribute("fill", "blue");
+          BackgroundLayer.setAttribute('onmouseover','removeQuickMenu(this.id);'); -->
+      
+      <!-- QuickActionOnPostLayer.setAttribute('onmouseover','removeQuickMenu(this.id);'); Highlight..-->
           
           <!-- VARIABLEN -->
           var ButtonPost = []
@@ -61,14 +75,17 @@
            ButtonPost[BPy].setAttribute("width", 460);
            ButtonPost[BPy].setAttribute("height", 160);
            ButtonPost[BPy].setAttribute("fill", "black");
+        
+           <!-- BackgroundPane.setAttribute("height", BackgroundPane.getAttribute("height")+160); --> <!-- Increase background hover area; fix the infinite expansion later..-->
       
            ButtonPostMouseOver[BPy] = document.createElementNS(NS, "rect");
            ButtonPostMouseOver[BPy].setAttribute("id", BPy); <!-- Hack.. -->
+           ButtonPostMouseOver[BPy].setAttribute('onclick','inputText(this.id);');
            ButtonPostMouseOver[BPy].setAttribute('onmouseover','displayQuickMenu(this.id);');
            ButtonPostMouseOver[BPy].setAttribute("x", 460-460/10);
-           ButtonPostMouseOver[BPy].setAttribute("y", BPy*170+100);
+           ButtonPostMouseOver[BPy].setAttribute("y", BPy*170+110);
            ButtonPostMouseOver[BPy].setAttribute("width", 10+460/10);
-           ButtonPostMouseOver[BPy].setAttribute("height", 160);
+           ButtonPostMouseOver[BPy].setAttribute("height", 140);
       
            ButtonPostDelete[BPy] = document.createElementNS(NS, "rect"); <!-- Use clip-path later to cut it-->
            ButtonPostDelete[BPy].setAttribute("x", 50);
@@ -92,14 +109,16 @@
 
            <!-- PANE-->
       
+           svgPane.appendChild(BackgroundLayer);
            svgPane.appendChild(QuickActionOnPostLayer);
            svgPane.appendChild(PostLayer);
            svgPane.appendChild(MouseOverLayer);
-      
+           
            MouseOverLayer.appendChild(ButtonPostMouseOver[BPy]);
            PostLayer.appendChild(ButtonPost[BPy]);
            PostLayer.appendChild(ButtonPost_Text[BPy]);
            QuickActionOnPostLayer.appendChild(ButtonPostDelete[BPy]);
+          <!-- BackgroundLayer.appendChild(BackgroundPane); -->
       
       
           BPy=BPy+1;
@@ -126,7 +145,13 @@
     function displayQuickMenu(hover_id)
 	{
 		ButtonPostDelete[hover_id].setAttribute("fill", "red");
-        ButtonPostMouseOver[hover_id].setAttribute("fill", "none");
+        ButtonPostMouseOver[hover_id].setAttribute("fill", "invisible");
+	}
+    function removeQuickMenu(hover_id)
+	{
+        for (const s of ButtonPostDelete) {
+            s.setAttribute("fill", "none");
+        }
 	}
       
       function fucked() {
