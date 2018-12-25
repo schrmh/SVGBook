@@ -5,6 +5,8 @@ Branches:
 Current development will be in the JavaScriptTextFields branch.
 It won't differ much from the master branch but I may test some things 
 and then just push them at this branch..
+I will try to only cherry-pick major changes to master and remove small 
+party-done changes.
 
 -----
 TODO:
