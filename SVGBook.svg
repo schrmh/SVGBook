@@ -163,6 +163,11 @@
         ButtonPost_Text[clicked_id].textContent="";
         ButtonPostMouseOver[clicked_id].setAttribute("fill", "none");
         ButtonPostDelete[clicked_id].setAttribute("fill", "none");
+      
+        for (const s of ButtonPost) {
+            <!-- alert(s.id); -->
+            if(s.id>clicked_id) s.setAttribute("style", "fill-opacity: .20");
+        }
 	}
       
       function fucked() {
